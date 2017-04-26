@@ -21,28 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ApkParser parser = null;
-        try {
-            parser = ApkParser.create(getPackageManager(), "com.alensw.PicFolder");
-            AndroidManifest androidManifest = parser.getAndroidManifest();
-            for (AndroidComponent component : androidManifest.getComponents()) {
-                if (component.type == 1 && !component.intentFilters.isEmpty()) {
-                    Log.d("test", component.name);
-                    for (IntentFilter intentFilter : component.intentFilters) {
-                        List<IntentFilter.IntentData> dataList = intentFilter.dataList;
-                        for (IntentFilter.IntentData data : dataList) {
-                            Log.d("test", data.mimeType);
-                        }
-                    }
-                }
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         System.out.println("hhhh");
         Log.d("test", "onCreate: ");
     }
