@@ -18,31 +18,29 @@ import java.util.List;
 public class Parser {
     private ApkParser parser = null;
 
-    public Parser(PackageManager pm ,String packageName) throws PackageManager.NameNotFoundException {
+    public Parser(PackageManager pm, String packageName) throws PackageManager.NameNotFoundException {
         parser = ApkParser.create(pm, packageName);
     }
 
-    public List getTarget() {
+    public List getComponents() {
+        return null;
+    }
 
-        try {
-            AndroidManifest androidManifest = parser.getAndroidManifest();
-            for (AndroidComponent component : androidManifest.getComponents()) {
-                if (component.type == 1 && !component.intentFilters.isEmpty()) {
+    public List getTarget() throws Exception {
+
+        AndroidManifest androidManifest = parser.getAndroidManifest();
+        for (AndroidComponent component : androidManifest.getComponents()) {
+            if (component.type == 1 && !component.intentFilters.isEmpty()) {
 //                    Log.d("test", component.name);
-                    for (IntentFilter intentFilter : component.intentFilters) {
-                        List<IntentFilter.IntentData> dataList = intentFilter.dataList;
-                        for (IntentFilter.IntentData data : dataList) {
+                for (IntentFilter intentFilter : component.intentFilters) {
+                    List<IntentFilter.IntentData> dataList = intentFilter.dataList;
+                    for (IntentFilter.IntentData data : dataList) {
 //                            Log.d("test", data.mimeType);
-                        }
+
                     }
                 }
             }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        return null;
     }
 }
